@@ -25,6 +25,7 @@ import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
 import { deleteToDoList, getToDoList } from "../../api/toDoListApi";
 import ModalToDoList from "../modal";
 import { format } from "date-fns";
+import { useNavigate } from "react-router";
 
 function TableToDoList() {
   const [reLoad, setReLoad] = useState(false);
@@ -42,6 +43,7 @@ function TableToDoList() {
   const [selectedToDoListUserName, setSelectedToDoListUserName] = useState("");
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(0);
+  const navigate = useNavigate();
 
   const handleOpenModal = (
     toDoListId,
@@ -64,6 +66,11 @@ function TableToDoList() {
   const handleCloseModal = () => {
     setOpenModal(false);
     setReLoad(!reLoad);
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/");
   };
 
   const theme = useTheme();
@@ -148,6 +155,15 @@ function TableToDoList() {
         selectedToDoListIsActive={selectedToDoListIsActive}
         selectedToDoListUserName={selectedToDoListUserName}
       ></ModalToDoList>
+      <Box sx={{ display: "flex", justifyContent: "flex-end", p: 2 }}>
+        <Button
+          variant="contained"
+          color="error" // Màu đỏ
+          onClick={handleLogout}
+        >
+          Logout
+        </Button>
+      </Box>
       <h1>Table To Do List</h1>
       <Button variant="outlined" onClick={() => handleOpenModal()}>
         Add New

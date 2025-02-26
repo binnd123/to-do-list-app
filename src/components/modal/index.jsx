@@ -58,9 +58,11 @@ export default function ModalToDoList({
       if (selectedToDoListId) {
         const response = await updateToDoList(selectedToDoListId, requestData);
         console.log("API response:", response);
+        alert("Thay đổi thành công!");
       } else {
         const response = await createToDoList(requestData);
         console.log("API response:", response);
+        alert("Tạo thành công!");
       }
     } catch (error) {
       console.error(
@@ -129,6 +131,7 @@ export default function ModalToDoList({
               <DesktopDatePicker
                 label="Complete At"
                 name="completeAt"
+                id="completeAt"
                 margin="normal"
                 disablePast
                 defaultValue={
@@ -146,6 +149,8 @@ export default function ModalToDoList({
             <TextField
               name="title"
               label="Title"
+              id="title"
+              autoComplete="off" // 🔥 Thêm dòng này
               required={selectedToDoListId === null}
               defaultValue={
                 selectedToDoListId === null ? "" : selectedToDoListTitle
@@ -158,6 +163,8 @@ export default function ModalToDoList({
             <TextField
               name="description"
               label="Description"
+              id="description"
+              autoComplete="off" // 🔥 Thêm dòng này
               required={selectedToDoListId === null}
               defaultValue={
                 selectedToDoListId === null ? "" : selectedToDoListDescription
@@ -170,6 +177,8 @@ export default function ModalToDoList({
             <TextField
               name="userName"
               label="Assignee"
+              id="username"
+              autoComplete="off" // 🔥 Thêm dòng này
               required={selectedToDoListId === null}
               type="text"
               size="small"
@@ -182,6 +191,8 @@ export default function ModalToDoList({
             <TextField
               name="status"
               label="Status"
+              id="status"
+              autoComplete="off" // 🔥 Thêm dòng này
               required={selectedToDoListId === null}
               defaultValue={
                 selectedToDoListId === null ? "" : selectedToDoListStatus
@@ -194,6 +205,7 @@ export default function ModalToDoList({
             <TextField
               name="isActive"
               label="Active"
+              id="isActive"
               required={selectedToDoListId === null}
               size="small"
               defaultValue={
